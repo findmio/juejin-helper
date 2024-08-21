@@ -20,10 +20,5 @@
             "css": ["content.css"]
         }
     ],
-    "action": {
-        "default_icon": "images/icon@128.png",
-        "default_title": "掘金助手",
-        "default_popup": "popup.html"
-    },
     "offline_enabled": false
 }
