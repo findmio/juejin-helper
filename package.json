@@ -11,7 +11,6 @@
         "antd": "^5.19.3",
         "file-saver": "^2.0.5",
         "jszip": "^3.10.1",
-        "p-limit": "^6.1.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },
@@ -19,6 +18,7 @@
         "@rspack/cli": "1.0.0-beta.4",
         "@rspack/core": "1.0.0-beta.4",
         "@rspack/plugin-react-refresh": "1.0.0-beta.5",
+        "@types/chrome": "^0.0.270",
         "@types/file-saver": "^2.0.7",
         "@types/react": "^18.2.48",
         "@types/react-dom": "^18.2.18",
