@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Popconfirm } from 'antd';
 import DownloadModal from './components/DownloadModal';
 
-import './main.css';
+import './index.css';
 
 const showConfirm = () => {
     const downloadEle = document.createElement('div');
