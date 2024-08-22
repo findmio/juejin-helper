@@ -12,7 +12,7 @@
     "author": "findmio",
     "homepage_url": "https://github.com/findmio/juejin-helper",
     "permissions": ["storage", "scripting"],
-    "host_permissions": ["<all_urls>"],
+    "host_permissions": ["https://juejin.cn/*"],
     "content_scripts": [
         {
             "matches": ["https://juejin.cn/*"],
