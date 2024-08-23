@@ -1,7 +1,4 @@
-@tailwind base;
+/* remove preflight https://tailwindcss.com/docs/preflight */
+/* @tailwind base; */
 @tailwind components;
 @tailwind utilities;
-
-p {
-    margin: 8px 0;
-}
