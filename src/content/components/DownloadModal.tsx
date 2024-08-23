@@ -112,7 +112,7 @@ const DownloadModal = () => {
                 onCancel={() => setOpen(false)}
             >
                 <div>
-                    <p>
+                    <p className='my-4'>
                         <strong className='mr-1'>
                             <a
                                 className='text-black text-xl font-bold'
@@ -169,7 +169,7 @@ const DownloadModal = () => {
                                     ref={messagesEle}
                                 >
                                     {messagesRef.current.map(message => (
-                                        <div key={message} className=''>
+                                        <div key={message} className='my-1'>
                                             {message}
                                         </div>
                                     ))}
