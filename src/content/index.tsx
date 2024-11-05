@@ -1,9 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Popconfirm } from 'antd';
+import { PostMessageType } from 'share/constant';
+
 import DownloadModal from './components/DownloadModal';
+import DownloadPost from './components/DownloadPost';
 
 import './index.css';
+
+const script = document.createElement('script');
+script.setAttribute('type', 'text/javascript');
+script.setAttribute('src', chrome.runtime.getURL('inject.js'));
+document.documentElement.appendChild(script);
+
+window.addEventListener('message', event => {
+    if (event.source !== window) return;
+    if (event.data.type === PostMessageType.EMIT_POST_STATE) {
+        window.__NUXT__ = event.data.data;
+    }
+});
 
 const showConfirm = () => {
     const downloadEle = document.createElement('div');
@@ -45,6 +60,22 @@ const callback: MutationCallback = (mutationsList, observer) => {
 
     if (buyEle) {
         injectDownloadBtn();
+    }
+    const panelEle = document.querySelector('.article-suspended-panel');
+    if (document.querySelector('#download')) {
+        return;
+    }
+    
+    if (panelEle) {
+        const downloadEle = document.createElement('div');
+        downloadEle.id = 'download';
+        downloadEle.classList.add('panel-btn');
+        ReactDOM.createRoot(downloadEle).render(
+            <React.StrictMode>
+                <DownloadPost />
+            </React.StrictMode>
+        );
+        panelEle.appendChild(downloadEle);
     }
 };
 

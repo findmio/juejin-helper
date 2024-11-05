@@ -2,7 +2,7 @@
     "name": "掘金助手",
     "manifest_version": 3,
     "description": "为掘金网页版开发的浏览器插件，支持小册下载",
-    "version": "1.0",
+    "version": "1.1.1",
     "icons": {
         "16": "images/icon@16.png",
         "32": "images/icon@32.png",
@@ -11,7 +11,7 @@
     },
     "author": "findmio",
     "homepage_url": "https://github.com/findmio/juejin-helper",
-    "permissions": ["storage", "scripting"],
+    "permissions": [],
     "host_permissions": ["https://juejin.cn/*"],
     "content_scripts": [
         {
@@ -20,5 +20,16 @@
             "css": ["content.css"]
         }
     ],
-    "offline_enabled": false
+    "offline_enabled": false,
+    "web_accessible_resources": [
+        {
+            "matches": ["https://juejin.cn/*"],
+            "resources": ["inject.js"]
+        }
+    ],
+    "action": {
+        "default_icon": "images/icon@128.png",
+        "default_title": "爱种草选号",
+        "default_popup": "popup.html"
+    }
 }

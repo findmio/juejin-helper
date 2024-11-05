@@ -1,5 +1,6 @@
 import { defineConfig } from '@rspack/cli';
 import { rspack } from '@rspack/core';
+import { resolve } from "path";
 import * as RefreshPlugin from '@rspack/plugin-react-refresh';
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -9,9 +10,13 @@ export default defineConfig({
     entry: {
         content: './src/content/index.tsx',
         popup: './src/popup/index.tsx',
+        inject: './src/inject/index.ts',
     },
     resolve: {
         extensions: ['...', '.ts', '.tsx', '.jsx'],
+        alias: {
+            share: resolve(__dirname, './src/share'),
+        },
     },
     module: {
         rules: [

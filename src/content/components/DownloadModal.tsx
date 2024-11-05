@@ -6,10 +6,10 @@ import { saveAs } from 'file-saver';
 
 import type { SectionType } from '../api.ts';
 import { getBookInfo, getSectionInfo } from '../api.ts';
-import { replaceFileName, sleep } from '../utils.ts';
+import { replaceFileName, sleep } from 'share/utils.ts';
 
 const DownloadModal = () => {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(true); 
 
     const [message, setMessage] = useState('获取目录数据');
     const messagesRef = useRef<string[]>([message]);

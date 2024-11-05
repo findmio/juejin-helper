@@ -4,33 +4,38 @@
     "version": "1.0.0",
     "scripts": {
         "dev": "cross-env NODE_ENV=development rspack serve",
-        "build": "cross-env NODE_ENV=production rspack build"
+        "build": "cross-env NODE_ENV=production rspack build -w"
     },
     "dependencies": {
-        "ahooks": "^3.8.0",
-        "antd": "^5.19.3",
+        "ahooks": "^3.8.1",
+        "antd": "^5.21.4",
         "file-saver": "^2.0.5",
+        "htmlparser2": "^9.1.0",
         "jszip": "^3.10.1",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "turndown": "^7.2.0",
+        "xhook": "^1.6.2"
     },
     "devDependencies": {
-        "@rspack/cli": "1.0.0-beta.4",
-        "@rspack/core": "1.0.0-beta.4",
-        "@rspack/plugin-react-refresh": "1.0.0-beta.5",
+        "@rspack/cli": "1.0.13",
+        "@rspack/core": "1.0.13",
+        "@rspack/plugin-react-refresh": "1.0.0",
         "@types/chrome": "^0.0.270",
         "@types/file-saver": "^2.0.7",
-        "@types/react": "^18.2.48",
-        "@types/react-dom": "^18.2.18",
+        "@types/react": "^18.3.11",
+        "@types/react-dom": "^18.3.1",
+        "@types/turndown": "^5.0.5",
+        "@types/xhook": "^1.5.3",
         "autoprefixer": "^10.4.20",
         "cross-env": "^7.0.3",
         "css-loader": "^7.1.2",
-        "postcss": "^8.4.41",
+        "postcss": "^8.4.47",
         "postcss-loader": "^8.1.1",
-        "react-refresh": "^0.14.0",
+        "react-refresh": "^0.14.2",
         "style-loader": "^4.0.0",
-        "tailwindcss": "^3.4.10",
+        "tailwindcss": "^3.4.14",
         "ts-node": "^10.9.2",
-        "typescript": "^5.3.3"
+        "typescript": "^5.6.3"
     }
 }
