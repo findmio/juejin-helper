@@ -2,14 +2,15 @@
 export const replaceFileName = (fileName: string) => {
     // https://docs.microsoft.com/zh-cn/windows/desktop/FileIO/naming-a-file#naming_conventions
     const replaceMap = new Map([
-        ['<', '\uFE64'],
-        ['>', '\uFE65'],
-        [':', '\uA789'],
-        ['/', '\u2215'],
-        ['\\', '\uFE68'],
-        ['|', '\u2758'],
-        ['?', '\uFE16'],
-        ['*', '\uFE61'],
+        ['<', '\uFF1C'], // Fullwidth Less-Than Sign
+        ['>', '\uFF1E'], // Fullwidth Greater-Than Sign
+        [':', '\uFF1A'], // Fullwidth Colon
+        ['/', '\uFF0F'], // Fullwidth Solidus
+        ['\\', '\uFF3C'], // Fullwidth Reverse Solidus
+        ['|', '\uFF5C'], // Fullwidth Vertical Line
+        ['?', '\uFF1F'], // Fullwidth Question Mark
+        ['*', '\uFF0A'], // Fullwidth Asterisk
+        ['"', '\uFF02'], // Fullwidth Quotation Mark
     ]);
 
     const pattern = [...replaceMap.keys()].map(key => '\\' + key).join('|');
