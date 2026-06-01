@@ -1,4 +1,4 @@
-interface Article_Info_Type {
+export interface ArticleInfoType {
     article_id: string;
     user_id: string;
     category_id: string;
@@ -42,4 +42,20 @@ interface Article_Info_Type {
     content_count: number;
     read_time: string;
     pics_expire_time: number;
+}
+
+export interface JuejinNuxtState {
+    state: {
+        view: {
+            column: {
+                entry: {
+                    article_info: ArticleInfoType;
+                };
+            };
+        };
+    };
+}
+
+declare global {
+    type Article_Info_Type = ArticleInfoType;
 }

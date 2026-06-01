@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Popconfirm } from 'antd';
-import { PostMessageType } from 'share/constant';
 
 import DownloadModal from './components/DownloadModal';
 import DownloadPost from './components/DownloadPost';
@@ -11,14 +10,8 @@ import './index.css';
 const script = document.createElement('script');
 script.setAttribute('type', 'text/javascript');
 script.setAttribute('src', chrome.runtime.getURL('inject.js'));
+script.addEventListener('load', () => script.remove());
 document.documentElement.appendChild(script);
-
-window.addEventListener('message', event => {
-    if (event.source !== window) return;
-    if (event.data.type === PostMessageType.EMIT_POST_STATE) {
-        window.__NUXT__ = event.data.data;
-    }
-});
 
 const showConfirm = () => {
     const downloadEle = document.createElement('div');

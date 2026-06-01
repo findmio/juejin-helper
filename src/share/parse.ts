@@ -2,8 +2,9 @@ import * as htmlparser2 from 'htmlparser2';
 import { saveAs } from 'file-saver';
 import TurndownService from 'turndown';
 import { replaceFileName } from 'share/utils.ts';
+import type { ArticleInfoType } from './types';
 
-export function parseHtml(article_info: Article_Info_Type) {
+export function parseHtml(article_info: ArticleInfoType) {
     const { web_html_content, title } = article_info;
     const turndownService = new TurndownService();
 

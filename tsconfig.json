@@ -10,11 +10,11 @@
         "isolatedModules": true,
         "resolveJsonModule": true,
         "moduleResolution": "bundler",
-        "baseUrl": "./",
+        "types": ["chrome"],
         "useDefineForClassFields": true,
         "allowImportingTsExtensions": true,
         "paths": {
-            "share/*": ["src/share/*"]
+            "share/*": ["./src/share/*"]
         }
     },
     "include": ["src"],

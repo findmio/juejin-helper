@@ -1,33 +1,7 @@
-/// <reference path="./share/types.ts" />
+import type { JuejinNuxtState } from './share/types';
 
-declare module '*.svg' {
-    interface Svg {
-        content: string;
-        id: string;
-        viewBox: string;
-        node: any;
+declare global {
+    interface Window {
+        __NUXT__?: JuejinNuxtState;
     }
-    const svg: Svg;
-    export default svg;
-}
-
-declare module '*.png' {
-    const png: string;
-    export default png;
-}
-
-declare module '*.less';
-
-declare interface Window {
-    __NUXT__: {
-        state: {
-            view: {
-                column: {
-                    entry: {
-                        article_info: Article_Info_Type;
-                    };
-                };
-            };
-        };
-    };
 }
