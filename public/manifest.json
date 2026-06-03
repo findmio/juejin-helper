@@ -2,7 +2,7 @@
     "name": "掘金助手",
     "manifest_version": 3,
     "description": "为掘金网页版开发的浏览器插件，支持小册下载",
-    "version": "1.2.0",
+    "version": "1.3.1",
     "icons": {
         "16": "images/icon@16.png",
         "32": "images/icon@32.png",
@@ -12,7 +12,10 @@
     "author": "findmio",
     "homepage_url": "https://github.com/findmio/juejin-helper",
     "permissions": [],
-    "host_permissions": ["https://juejin.cn/*"],
+    "host_permissions": ["https://juejin.cn/*", "https://*/*", "http://*/*"],
+    "background": {
+        "service_worker": "background.js"
+    },
     "content_scripts": [
         {
             "matches": ["https://juejin.cn/*"],

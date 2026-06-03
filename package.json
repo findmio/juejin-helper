@@ -14,7 +14,7 @@
         "jszip": "^3.10.1",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
-        "turndown": "^7.2.0",
+        "turndown": "^7.2.4",
         "xhook": "^1.6.2"
     },
     "devDependencies": {
@@ -26,7 +26,7 @@
         "@types/file-saver": "^2.0.7",
         "@types/react": "^18.3.18",
         "@types/react-dom": "^18.3.5",
-        "@types/turndown": "^5.0.5",
+        "@types/turndown": "^5.0.6",
         "@types/xhook": "^1.5.3",
         "autoprefixer": "^10.4.20",
         "cross-env": "^7.0.3",

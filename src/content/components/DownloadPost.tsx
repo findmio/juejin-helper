@@ -9,6 +9,7 @@ import {
     requestArticleInfoFromPage,
 } from '../pageArticleInfo';
 import { downloadRemoteImage } from '../downloadImage';
+import { resolveArticleMarkdown } from '../articleContent';
 
 const downloadMessageKey = 'download-post';
 
@@ -32,8 +33,8 @@ const DownloadPost = () => {
             });
 
             const article_info = await requestArticleInfoFromPage();
-            const mark_content = article_info?.mark_content;
-            if (!mark_content) {
+            const articleMarkdown = resolveArticleMarkdown(article_info);
+            if (!articleMarkdown) {
                 messageApi.open({
                     key: downloadMessageKey,
                     type: 'error',
@@ -43,7 +44,8 @@ const DownloadPost = () => {
                 return;
             }
 
-            const { title } = article_info;
+            const title =
+                article_info?.title || document.title || 'juejin-article';
             const fileName = replaceFileName(title);
 
             messageApi.open({
@@ -54,7 +56,7 @@ const DownloadPost = () => {
             });
 
             const archive = await createMarkdownArchive({
-                markdown: mark_content,
+                markdown: articleMarkdown,
                 markdownFileName: `${fileName}.md`,
                 downloadImage: downloadRemoteImage,
                 onProgress: progress => {
@@ -120,10 +122,12 @@ const DownloadPost = () => {
         <>
             {contextHolder}
             <Popover content='下载文章与图片'>
-                <div className='w-16 h-16 rounded-full flex items-center justify-center cursor-pointer shadow-[0_2px_4px_0_rgba(50, 50, 50, .04)] bg-[var(--juejin-layer-5)] text-[var(--juejin-font-3)] hover:text-[var(--juejin-font-2)]'>
+                <div
+                    className='w-16 h-16 rounded-full flex items-center justify-center cursor-pointer shadow-[0_2px_4px_0_rgba(50, 50, 50, .04)] bg-[var(--juejin-layer-5)] text-[var(--juejin-font-3)] hover:text-[var(--juejin-font-2)]'
+                    onClick={handleDownload}
+                >
                     <div
                         className={`w-6 ${downloading ? 'opacity-50 pointer-events-none' : ''}`}
-                        onClick={handleDownload}
                     >
                         <svg
                             viewBox='0 0 1024 1024'

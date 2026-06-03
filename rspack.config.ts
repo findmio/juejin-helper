@@ -8,6 +8,7 @@ const isDev = process.env.NODE_ENV === 'development';
 export default defineConfig({
     context: __dirname,
     entry: {
+        background: './src/background/index.ts',
         content: './src/content/index.tsx',
         popup: './src/popup/index.tsx',
         inject: './src/inject/index.ts',

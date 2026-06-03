@@ -1,4 +1,4 @@
-import JSZip from 'jszip';
+import * as JSZip from 'jszip';
 
 import {
     collectRemoteMarkdownImageUrls,
@@ -29,6 +29,8 @@ type CreateMarkdownArchiveOptions = {
     markdown: string;
     markdownFileName: string;
     downloadImage: (url: string) => Promise<MarkdownImageDownloadResult>;
+    modifiedAt?: Date;
+    imageDownloadRetryCount?: number;
     onProgress?: (progress: MarkdownArchiveProgress) => void;
 };
 
@@ -39,16 +41,45 @@ export type MarkdownArchiveResult = {
     failedUrls: string[];
 };
 
+const DEFAULT_IMAGE_DOWNLOAD_RETRY_COUNT = 3;
+
+const createZipLocalDate = (date: Date) =>
+    new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
+
+
+const downloadImageWithRetry = async (
+    url: string,
+    downloadImage: (url: string) => Promise<MarkdownImageDownloadResult>,
+    retryCount: number
+) => {
+    for (let retryIndex = 0; retryIndex <= retryCount; retryIndex++) {
+        try {
+            return await downloadImage(url);
+        } catch (error) {
+            if (retryIndex === retryCount) {
+                throw error;
+            }
+        }
+    }
+
+    throw new Error('Image download failed');
+};
+
 export const createMarkdownArchive = async ({
     markdown,
     markdownFileName,
     downloadImage,
+    modifiedAt = new Date(),
+    imageDownloadRetryCount = DEFAULT_IMAGE_DOWNLOAD_RETRY_COUNT,
     onProgress,
 }: CreateMarkdownArchiveOptions): Promise<MarkdownArchiveResult> => {
     const zip = JSZip();
     const imageUrls = collectRemoteMarkdownImageUrls(markdown);
     const replacements = new Map<string, string>();
     const failedUrls: string[] = [];
+    const zipFileOptions = {
+        date: createZipLocalDate(modifiedAt),
+    };
 
     for (let index = 0; index < imageUrls.length; index++) {
         const url = imageUrls[index];
@@ -60,14 +91,18 @@ export const createMarkdownArchive = async ({
         });
 
         try {
-            const image = await downloadImage(url);
+            const image = await downloadImageWithRetry(
+                url,
+                downloadImage,
+                imageDownloadRetryCount
+            );
             const filePath = createMarkdownImageFilePath(
                 url,
                 replacements.size,
                 image.contentType
             );
 
-            zip.file(filePath, image.data);
+            zip.file(filePath, image.data, zipFileOptions);
             replacements.set(url, `./${filePath}`);
         } catch {
             failedUrls.push(url);
@@ -75,10 +110,10 @@ export const createMarkdownArchive = async ({
     }
 
     const nextMarkdown = replaceMarkdownImageUrls(markdown, replacements);
-    zip.file(markdownFileName, nextMarkdown);
+    zip.file(markdownFileName, nextMarkdown, zipFileOptions);
 
     if (failedUrls.length > 0) {
-        zip.file('failed-images.txt', failedUrls.join('\n'));
+        zip.file('failed-images.txt', failedUrls.join('\n'), zipFileOptions);
     }
 
     onProgress?.({
